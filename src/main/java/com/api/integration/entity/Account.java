@@ -1,11 +1,20 @@
 package com.api.integration.entity;
 
 import jakarta.persistence.*;
-
 import java.util.Objects;
 
 @Entity
 public class Account {
+
+    public Account() {
+    }
+
+    public Account(String full_name, String email, String phone_number, String location) {
+        this.full_name = full_name;
+        this.email = email;
+        this.phone_number = phone_number;
+        this.location = location;
+    }
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long account_id;

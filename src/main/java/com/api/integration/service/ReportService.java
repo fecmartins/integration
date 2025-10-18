@@ -25,7 +25,7 @@ public class ReportService {
 
         // Fetch data from the mock API and expect an array of DataRecord
         ResponseEntity<DataRecord[]> response = rt.getForEntity("http://localhost:8080/mock-api", DataRecord[].class);
-        //Get the reponse body
+        //Get the response body
         DataRecord[] dataRecords = response.getBody();
         //System.out.println(Arrays.toString(response.getBody()));
 
@@ -46,9 +46,10 @@ public class ReportService {
                         }, () -> {
                     // 2b. if email doesn't exist
                     System.out.println("Email not found");
+                    //Persist on DB
+                    Account accountpersist = new Account(d.fullName(), d.email(),d.phoneNumber(), d.location());
+                    repository.save(accountpersist);
                 });
-                // Optionally, add database logic
-                // Example: accountService.save(d);
             }
         } else {
             System.out.println("No data received from the API.");
